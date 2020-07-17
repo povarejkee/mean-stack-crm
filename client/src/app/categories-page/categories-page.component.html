@@ -1,24 +1,33 @@
 <div class="page-title">
   <h4>Категории</h4>
-  <button class="waves-effect waves-light btn grey darken-1">Добавить категорию</button>
+  <button
+    class="waves-effect waves-light btn grey darken-1"
+    routerLink="/categories/new"
+  >
+    Добавить категорию
+  </button>
 </div>
 
-<div class="row" *ngIf = "!isLoading">
+<div class="row" *ngIf = "categories$ | async as categories; else loader">
   <div class="col s12">
-    <div class="collection">
+    <div class="collection" *ngIf = "categories.length; else empty">
       <a
         *ngFor = "let category of categories"
         href="#"
         class="collection-item"
+        [routerLink] = "['/categories', category._id]"
       >
         {{ category.name }}
       </a>
-
-      <!-- временные заглушки -->
-      <a href="#" class="collection-item">Категория 1</a>
-      <a href="#" class="collection-item active">Категория 2</a>
     </div>
   </div>
 </div>
 
-<app-loader *ngIf = "isLoading"></app-loader>
+<ng-template #empty>
+  <p class="center">Список категорий пуст</p>
+</ng-template>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
