@@ -8,7 +8,13 @@ import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.co
 import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
-import { TokenInterceptor } from './shared/services/token.interceptor'
+import { TokenInterceptor } from './shared/services/token.interceptor';
+import { OverviewPageComponent } from './overview-page/overview-page.component';
+import { AnalyticsPageComponent } from './analytics-page/analytics-page.component';
+import { HistoryPageComponent } from './history-page/history-page.component';
+import { OrderPageComponent } from './order-page/order-page.component';
+import { CategoriesPageComponent } from './categories-page/categories-page.component';
+import { LoaderComponent } from './shared/components/loader/loader.component'
 
 @NgModule({
   declarations: [
@@ -17,6 +23,12 @@ import { TokenInterceptor } from './shared/services/token.interceptor'
     RegisterPageComponent,
     AuthLayoutComponent,
     MainLayoutComponent,
+    OverviewPageComponent,
+    AnalyticsPageComponent,
+    HistoryPageComponent,
+    OrderPageComponent,
+    CategoriesPageComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
