@@ -7,6 +7,8 @@ import { RegisterPageComponent } from './register-page/register-page.component'
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component'
 import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
+import { TokenInterceptor } from './shared/services/token.interceptor'
 
 @NgModule({
   declarations: [
@@ -16,8 +18,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     AuthLayoutComponent,
     MainLayoutComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

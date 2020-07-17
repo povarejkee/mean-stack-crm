@@ -18,7 +18,7 @@
       <label for="email">Email:</label>
       <span
         class="helper-text red-text"
-        *ngIf = "form.get('email').touched"
+        *ngIf = "form.get('email').touched && form.get('email').invalid"
       >
         <span *ngIf = "form.get('email').hasError('required')">Обязательное поле</span>
         <span *ngIf = "form.get('email').hasError('email')">Введите валидный email</span>
@@ -37,7 +37,7 @@
       <label for="password">Пароль:</label>
       <span
         class="helper-text red-text"
-        *ngIf = "form.get('password').touched"
+        *ngIf = "form.get('password').touched && form.get('password').invalid"
       >
         <span *ngIf = "form.get('password').hasError('required')">Обязательное поле</span>
         <span *ngIf = "form.get('password').hasError('minlength')">
@@ -49,6 +49,6 @@
   </div>
 
   <div class="card-action">
-    <button class="modal-action btn waves-effect" [disabled] = "form.invalid">Войти</button>
+    <button type="submit" class="modal-action btn waves-effect" [disabled] = "form.invalid || form.disabled">Войти</button>
   </div>
 </form>
