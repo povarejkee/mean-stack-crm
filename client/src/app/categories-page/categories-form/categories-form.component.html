@@ -12,29 +12,61 @@
 </div>
 
 <div class="row">
-  <div class="col s12 l6">
+  <form
+    class="col s12 l6"
+    [formGroup] = "form"
+    (ngSubmit) = "onSubmit()"
+  >
     <div class="input-field">
-      <input id="name" type="text" required />
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        [ngClass] = "{
+          invalid: form.get('name').touched && form.get('name').invalid
+        }"
+      />
       <label for="name">Название</label>
+      <span
+        class="helper-text red-text"
+        *ngIf = "form.get('name').touched && form.get('name').invalid"
+      >
+        <span *ngIf = "form.get('name').hasError('required')">Обязательное поле</span>
+      </span>
     </div>
 
     <div>
-      <button class="waves-effect waves-light btn orange lighten-2 mb2">
+      <input
+        type="file"
+        hidden
+        #inputFile
+        (change) = "onFileChange($event)"
+      >
+      <button
+        class="waves-effect waves-light btn orange lighten-2 mb2"
+        type="button"
+        [disabled] = "form.disabled"
+        (click) = "triggerInputFileClick()"
+      >
         <i class="material-icons left">backup</i>
         Загрузить изображение
       </button>
     </div>
 
     <div>
-      <button class="waves-effect waves-light btn">
+      <button
+        class="waves-effect waves-light btn"
+        type="submit"
+        [disabled] = "form.invalid || form.disabled"
+      >
         Сохранить изменения
       </button>
     </div>
-  </div>
+  </form>
 
   <div class="col s12 l4 center">
-    <img class="responsive-img" style="height: 200px;" src="cake.jpg" />
+    <img class="responsive-img" style="height: 200px;" [src]="imgPreview" />
   </div>
 </div>
 
-<app-positions-crud></app-positions-crud>
+<!--<app-positions-crud></app-positions-crud>-->
