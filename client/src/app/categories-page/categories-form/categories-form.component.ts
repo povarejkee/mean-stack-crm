@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
-import { ActivatedRoute, Params } from '@angular/router'
+import { ActivatedRoute, Params, Router } from '@angular/router'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { switchMap } from 'rxjs/operators'
 import { CategoriesService } from '../../shared/services/categories.service'
-import { ICategory } from '../../shared/interfaces/interfaces'
-import { of } from 'rxjs'
+import { ICategory, IResponseMessage } from '../../shared/interfaces/interfaces'
+import { Observable, of, Subscription } from 'rxjs'
 import { MaterialService } from '../../shared/services/material.service'
 
 @Component({
@@ -19,10 +19,12 @@ export class CategoriesFormComponent implements OnInit {
   public form: FormGroup
   public img: File
   public imgPreview: string | ArrayBuffer
+  private categoryId: string
 
   constructor(
     private categoriesService: CategoriesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +49,8 @@ export class CategoriesFormComponent implements OnInit {
         (response: ICategory) => {
           if (response) {
             this.form.patchValue({ name: response.name })
-            this.imgPreview = response.imageSrc
+            this.imgPreview = response.image
+            this.categoryId = response._id
             MaterialService.updateInputValue()
             this.form.enable()
           }
@@ -60,7 +63,7 @@ export class CategoriesFormComponent implements OnInit {
     this.inputFileRef.nativeElement.click()
   }
 
-  onFileChange(event: Event): void {
+  onFileChange(event: any): void {
     const [file] = event.target.files
     const reader: FileReader = new FileReader()
 
@@ -73,5 +76,48 @@ export class CategoriesFormComponent implements OnInit {
     reader.readAsDataURL(file)
   }
 
-  onSubmit(): void {}
+  onSubmit(): void {
+    this.form.disable()
+    let obs$: Observable<ICategory>
+
+    if (this.editMode) {
+      obs$ = this.categoriesService.update(
+        this.categoryId,
+        this.form.value.name,
+        this.img
+      )
+    } else {
+      obs$ = this.categoriesService.create(this.form.value.name, this.img)
+    }
+
+    obs$.subscribe(
+      (response: ICategory) => {
+        this.form.enable()
+        this.categoryId = response._id
+        MaterialService.toast('Изменения сохранены')
+      },
+      (error: ErrorEvent) => {
+        this.form.enable()
+        MaterialService.toast(error.error.message)
+      }
+    )
+  }
+
+  removeCategory(): void {
+    const confirm = window.confirm(
+      'Вы действительно хотите удалить эту категорию?'
+    )
+
+    if (confirm) {
+      this.categoriesService.remove(this.categoryId).subscribe(
+        (response: IResponseMessage) => {
+          MaterialService.toast(response.message)
+        },
+        (error: ErrorEvent) => {
+          MaterialService.toast(error.error.message)
+        },
+        () => this.router.navigate(['/categories'])
+      )
+    }
+  }
 }

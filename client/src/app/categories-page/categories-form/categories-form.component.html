@@ -4,8 +4,8 @@
     <i class="material-icons">keyboard_arrow_right</i>
     {{ editMode ? 'Редактировать категорию' : 'Добавить категорию' }}
   </h4>
-  <span>
-    <button class="btn btn-small red">
+  <span *ngIf="editMode">
+    <button class="btn btn-small red" (click) = "removeCategory()">
       <i class="material-icons">delete</i>
     </button>
   </span>
@@ -65,7 +65,7 @@
   </form>
 
   <div class="col s12 l4 center">
-    <img class="responsive-img" style="height: 200px;" [src]="imgPreview" />
+    <img class="responsive-img" style="height: 200px;" [src] = "imgPreview" />
   </div>
 </div>
 

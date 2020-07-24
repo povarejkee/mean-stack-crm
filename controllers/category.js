@@ -34,7 +34,7 @@ module.exports.create = async (request, response) => {
   try {
     const category = await new Category({
       name: request.body.name,
-      imageSrc: request.file ? request.file.path : "",
+      image: request.file ? request.file.path : "",
       user: request.user.id,
     });
 
@@ -46,12 +46,12 @@ module.exports.create = async (request, response) => {
 };
 
 module.exports.edit = async (request, response) => {
-  const uploadedCategory = await new Category({
+  const uploadedCategory = {
     name: request.body.name,
-  });
+  };
 
   if (request.file) {
-    uploadedCategory.imageSrc = request.file.path;
+    uploadedCategory.image = request.file.path;
   }
 
   try {

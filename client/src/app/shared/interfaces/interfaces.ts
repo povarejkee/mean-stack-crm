@@ -14,6 +14,10 @@ export interface ILink {
 
 export interface ICategory {
   name: string
-  imageSrc?: string
+  image?: string
   _id?: string
+}
+
+export interface IResponseMessage {
+  message: string
 }
