@@ -69,4 +69,7 @@
   </div>
 </div>
 
-<!--<app-positions-crud></app-positions-crud>-->
+<app-positions-crud
+  *ngIf = "categoryId"
+  [categoryId] = "categoryId"
+></app-positions-crud>

@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { switchMap } from 'rxjs/operators'
 import { CategoriesService } from '../../shared/services/categories.service'
 import { ICategory, IResponseMessage } from '../../shared/interfaces/interfaces'
-import { Observable, of, Subscription } from 'rxjs'
+import { Observable, of } from 'rxjs'
 import { MaterialService } from '../../shared/services/material.service'
 
 @Component({
@@ -19,7 +19,7 @@ export class CategoriesFormComponent implements OnInit {
   public form: FormGroup
   public img: File
   public imgPreview: string | ArrayBuffer
-  private categoryId: string
+  public categoryId: string
 
   constructor(
     private categoriesService: CategoriesService,

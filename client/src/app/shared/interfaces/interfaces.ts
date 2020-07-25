@@ -21,3 +21,16 @@ export interface ICategory {
 export interface IResponseMessage {
   message: string
 }
+
+export interface IPosition {
+  name: string
+  cost: string
+  category: string
+  _id?: string
+}
+
+export interface IModalInstance {
+  open?(): void
+  close?(): void
+  destroy?(): void
+}

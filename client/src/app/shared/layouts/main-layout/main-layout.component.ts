@@ -23,7 +23,7 @@ export class MainLayoutComponent implements AfterViewInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngAfterViewInit(): void {
-    MaterialService.floatingBtnInit(this.floatingBthRef.nativeElement)
+    MaterialService.floatingBtnInit(this.floatingBthRef)
   }
 
   logout(event: Event): void {
