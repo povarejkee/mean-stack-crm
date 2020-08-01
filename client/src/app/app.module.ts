@@ -16,7 +16,9 @@ import { OrderPageComponent } from './order-page/order-page.component';
 import { CategoriesPageComponent } from './categories-page/categories-page.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { CategoriesFormComponent } from './categories-page/categories-form/categories-form.component';
-import { PositionsCrudComponent } from './categories-page/categories-form/positions-crud/positions-crud.component'
+import { PositionsCrudComponent } from './categories-page/categories-form/positions-crud/positions-crud.component';
+import { OrderCategoriesComponent } from './order-page/order-categories/order-categories.component';
+import { OrderPositionsComponent } from './order-page/order-positions/order-positions.component'
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { PositionsCrudComponent } from './categories-page/categories-form/positi
     LoaderComponent,
     CategoriesFormComponent,
     PositionsCrudComponent,
+    OrderCategoriesComponent,
+    OrderPositionsComponent,
   ],
   imports: [
     BrowserModule,

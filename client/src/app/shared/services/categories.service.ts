@@ -13,7 +13,7 @@ export class CategoriesService {
     return this.http.get<ICategory[]>('/api/category')
   }
 
-  getSingle(id): Observable<ICategory> {
+  getSingle(id: string): Observable<ICategory> {
     return this.http.get<ICategory>(`/api/category/${id}`)
   }
 
