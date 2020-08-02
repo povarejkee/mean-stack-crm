@@ -1,1 +1,42 @@
-<p>history-page works!</p>
+<div class="page-title">
+  <h4>История заказов</h4>
+  <button
+    class="btn btn-small"
+    data-tooltip="Фильтр"
+    #tooltip
+    (click) = "toggleFilter()"
+    [disabled] = "ordersList.length === 0"
+  >
+    <i class="material-icons">filter_list</i>
+  </button>
+</div>
+
+<app-history-filter
+  *ngIf = "isFilterVisible"
+  (filterEmitter) = "submitFilters($event)"
+></app-history-filter>
+
+<ng-container *ngIf = "!isLoading; else loader">
+  <app-history-table
+    [ordersList] = "ordersList"
+    *ngIf = "ordersList.length !== 0; else empty"
+  ></app-history-table>
+
+  <div class="center mb2" *ngIf = "isLoadMoreBtnVisible">
+    <button
+      class="btn waves-effect grey darken-1 btn-small"
+      (click) = "loadMore()"
+      *ngIf = "!loadMoreLoading; else loader"
+    >
+      Загрузить еще
+    </button>
+  </div>
+</ng-container>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+<ng-template #empty>
+  <h4>История заказов пуста</h4>
+</ng-template>

@@ -73,7 +73,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
     const order: IOrder = {
       list: this.orderService.orderList.map((item: IOrderListPosition) => {
-        delete item._id
+        delete item._id // не нужно отправлять id на сервер
         return item
       }),
     }

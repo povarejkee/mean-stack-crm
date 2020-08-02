@@ -37,6 +37,16 @@ export interface IModalInstance {
   destroy?(): void
 }
 
+export interface IPickerInstance extends IModalInstance {
+  date?: Date
+}
+
+export interface IHistoryFilter {
+  order?: number
+  start?: Date
+  end?: Date
+}
+
 export interface IOrderListPosition {
   name: string
   cost: string

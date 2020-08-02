@@ -1,5 +1,5 @@
 import { ElementRef } from '@angular/core'
-import { IModalInstance } from '../interfaces/interfaces'
+import { IModalInstance, IPickerInstance } from '../interfaces/interfaces'
 
 declare const M
 
@@ -18,5 +18,20 @@ export class MaterialService {
 
   static modalInit(element: ElementRef): IModalInstance {
     return M.Modal.init(element.nativeElement)
+  }
+
+  static tooltipInit(element: ElementRef): IModalInstance {
+    return M.Tooltip.init(element.nativeElement, { position: 'left' })
+  }
+
+  static datepickerInit(
+    element: ElementRef,
+    onClose: () => void
+  ): IPickerInstance {
+    return M.Datepicker.init(element.nativeElement, {
+      format: 'dd.mm.yyyy',
+      showClearBtn: true,
+      onClose,
+    })
   }
 }

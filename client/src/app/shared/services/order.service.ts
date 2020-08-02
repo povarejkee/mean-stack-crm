@@ -16,8 +16,6 @@ export class OrderService {
     )
   }
 
-  constructor() {}
-
   addPosition(position: IPosition): void {
     const transformedPosition: IOrderListPosition = {
       name: position.name,
