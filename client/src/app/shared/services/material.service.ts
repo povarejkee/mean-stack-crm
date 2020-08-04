@@ -34,4 +34,8 @@ export class MaterialService {
       onClose,
     })
   }
+
+  static tapTargetInit(element: ElementRef): IModalInstance {
+    return M.TapTarget.init(element.nativeElement)
+  }
 }

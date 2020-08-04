@@ -56,11 +56,7 @@ export class HistoryPageComponent implements OnInit, AfterViewInit, OnDestroy {
       .getAll(params)
       .subscribe((response: IOrder[]) => {
         this.ordersList = this.ordersList.concat(response)
-
-        if (response.length < this.getParams.limit) {
-          this.isLoadMoreBtnVisible = false
-        }
-
+        this.isLoadMoreBtnVisible = !(response.length < this.getParams.limit)
         this.isLoading = false
         this.loadMoreLoading = false
       })

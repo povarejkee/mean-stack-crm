@@ -61,3 +61,26 @@ export interface IOrder {
   user?: string
   _id?: string
 }
+
+export interface IAnalyticsOverview {
+  gain: IAnalyticsOverviewItem
+  orders: IAnalyticsOverviewItem
+}
+
+export interface IAnalyticsOverviewItem {
+  yesterday: number
+  isHigher: boolean
+  percent: number
+  compare: number
+}
+
+export interface IAnalytics {
+  average: number
+  chart: IAnalyticsChartPart[]
+}
+
+export interface IAnalyticsChartPart {
+  label: string
+  order: number
+  gain: number
+}

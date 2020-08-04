@@ -26,7 +26,10 @@ export class HistoryFilterComponent implements AfterViewInit, OnDestroy {
   >()
 
   public orderNumber: number
+  public startValue: string
+  public endValue: string
   public invalidDates: boolean
+  public range: boolean
 
   private pickerStart: IPickerInstance
   private pickerEnd: IPickerInstance
@@ -51,6 +54,8 @@ export class HistoryFilterComponent implements AfterViewInit, OnDestroy {
 
   validateDates = (): void => {
     this.invalidDates = this.pickerStart.date > this.pickerEnd.date
+    // todo дёргать значения пикеров ТУТ
+    this.range = !!this.pickerStart.date || !!this.pickerEnd.date
   }
 
   applyFilter(): void {
